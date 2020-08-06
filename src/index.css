@@ -4,10 +4,20 @@ body {
     font-family: sans-serif;
 }
 
+.App{
+    padding: 20px;
+}
+
 .App > div {
+    margin-top:20px;
     height: 400px;
 }
 
 .App select {
     font-size: 30px;
+}
+
+.highlighted
+{
+    color: #e92;
 }

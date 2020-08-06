@@ -1,23 +1,26 @@
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import { ColumnChart } from '@gooddata/react-components';
 
-const chartPeriod = (props) => {
+class chartPeriod  extends Component {
 
-  const { measures, viewBy, projectId } = props;
 
-  return (
-    <Fragment>
-      <h1>$ Gross Profit - All months</h1>
-      <div>
-        <ColumnChart
-          measures={measures}
-          viewBy={viewBy}
-          projectId={projectId}
-        />
-      </div>
-    </Fragment>
-  )
+  render() {
+    const { measures, viewBy, projectId, chartPeriodClickHandler } = this.props;
+
+    return (
+      <Fragment>
+        <h1>$ Gross Profit - All months</h1>
+        <div onClick = {chartPeriodClickHandler}>
+          <ColumnChart 
+            measures={measures}
+            viewBy={viewBy}
+            projectId={projectId}
+          />
+        </div>
+      </Fragment>
+    )
+  }
 }
 
 export default chartPeriod;

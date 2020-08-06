@@ -14,9 +14,11 @@ const dateAttribute = '/gdc/md/xms7ga4tf3g3nzucd8380o2bev8oeknp/obj/2180';
 class App extends Component {
 
     state = {
-        monthsSelected: 1,
+        monthSelected: 1,
         yearSelected: 2016
     }
+
+    previousNode = null;
 
     getMonthFilter(month, year) {
         return {
@@ -61,25 +63,60 @@ class App extends Component {
         }
     }
 
-    onChangeFilterMonth(event) {
+    onChangeFilterMonthHandler(event) {
         const newMonth = event.target.value;
 
-        this.setState({ monthsSelected: newMonth });
+        this.setState({ monthSelected: newMonth })
     }
 
-    onChangeFilterYear(event) {
+    onChangeFilterYearHandler(event) {
         const newYear = event.target.value;
 
-        this.setState({ yearSelected: newYear });
+        this.setState({ yearSelected: newYear })
+    }
+
+
+    chartPeriodClickHandler(event) {
+        if (!(event.target.tagName === 'rect' && !event.target.className.baseVal))
+            return; // takes effect only on rects 
+
+        let parentNode = event.target.parentElement;
+        // remove the highlight
+
+
+        //if (this.previousNode)
+            // leave it for later this.previousNode.style.fill = 'rgb(20, 178, 226)';
+        // parentNode.child[ (this.state.yearSelected - 2015 )* 12 + this.state.monthSelected - 1].className = '';
+
+        let res = {
+            monthSelected: 1,
+            yearSelected: 2016
+        }; // defaults 
+
+        for (let i = 0; i < parentNode.children.length; i++) {
+
+            if (parentNode.children[i] === event.target) {
+                res.yearSelected = 2015 + Math.floor(i / 12);
+                res.monthSelected = 1 + i % 12;
+
+                // for later improvements event.target.style.fill = 'rgb(225, 178, 26)';
+                //this.previousNode = event.target;
+
+                this.setState(res);
+
+                break
+            }
+        }
     }
 
     render() {
         const projectId = 'xms7ga4tf3g3nzucd8380o2bev8oeknp';
-        const filters = [this.getMonthFilter(this.state.monthsSelected, this.state.yearSelected)];
+        const filters = [this.getMonthFilter(this.state.monthSelected, this.state.yearSelected)];
         const measures = this.getMeasures();
         const viewBy = this.getViewBy();
-        const onChangeFilterMonth = this.onChangeFilterMonth.bind(this);
-        const onChangeFilterYear = this.onChangeFilterYear.bind(this);
+        const onChangeFilterMonthHandler = this.onChangeFilterMonthHandler.bind(this);
+        const onChangeFilterYearHandler = this.onChangeFilterYearHandler.bind(this);
+        const chartPeriodClickHandler = this.chartPeriodClickHandler.bind(this);
 
         return (
             <div className="App">
@@ -87,15 +124,17 @@ class App extends Component {
                     measures={measures}
                     filters={filters}
                     projectId={projectId}
-                    selectedValueMonth={this.state.monthsSelected}
+                    selectedValueMonth={this.state.monthSelected}
                     selectedValueYear={this.state.yearSelected}
-                    onChangeFilterMonth={onChangeFilterMonth}
-                    onChangeFilterYear={onChangeFilterYear}
+                    onChangeFilterMonthHandler={onChangeFilterMonthHandler}
+                    onChangeFilterYearHandler={onChangeFilterYearHandler}
                 />
                 <Chartperiod
+                    id='groupChart'
                     measures={measures}
                     viewBy={viewBy}
                     projectId={projectId}
+                    chartPeriodClickHandler={chartPeriodClickHandler}
                 />
             </div>
         );

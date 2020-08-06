@@ -6,11 +6,11 @@ import DropdownYear from './UX/dropdownYear';
 
 const chartDetailed = (props) => {
 
-  const { selectedValueMonth, selectedValueYear, measures, filters, projectId, onChangeFilterMonth, onChangeFilterYear } = props;
+  const { selectedValueMonth, selectedValueYear, measures, filters, projectId, onChangeFilterMonthHandler, onChangeFilterYearHandler } = props;
 
   return (
     <Fragment>
-      <h1>$ Gross Profit in month <DropdownMonth selectedValue={selectedValueMonth} onChangeFilter={onChangeFilterMonth} /> <DropdownYear selectedValue={selectedValueYear} onChangeFilter={onChangeFilterYear} /> </h1>
+      <h1>$ Gross Profit in month <DropdownMonth selectedValue={selectedValueMonth} onChangeFilterHandler={onChangeFilterMonthHandler} /> <DropdownYear selectedValue={selectedValueYear} onChangeFilterHandler={onChangeFilterYearHandler} /> </h1>
       <div>
         <ColumnChart
           measures={measures}

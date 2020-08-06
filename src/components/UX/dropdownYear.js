@@ -8,11 +8,11 @@ const dropdownYear = (props) => {
     2017
   ];
 
-  const { selectedValue, onChangeFilter } = props;
+  const { selectedValue, onChangeFilterHandler } = props;
 
   return (
-    <select defaultValue={selectedValue} onChange={onChangeFilter} >
-      {years.map((value, index) => <option key={index} value={value}>{value}</option>)}
+    <select defaultValue={selectedValue} onChange={onChangeFilterHandler} >
+      {years.map((value, index) => <option key={index} value={value} selected ={selectedValue === value}>{value}</option>)}
     </select>
   )
 }
