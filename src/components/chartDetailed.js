@@ -5,11 +5,11 @@ import Dropdown from './UX/dropdown';
 
 const chartDetailed = (props) => {
 
-  const { selectedValue, measures, filters, projectId } = props;
+  const { selectedValue, measures, filters, projectId, onChangeFilter } = props;
 
   return (
     <Fragment>
-      <h1>$ Gross Profit in month <Dropdown selectedValue={selectedValue} /> 2016</h1>
+      <h1>$ Gross Profit in month <Dropdown selectedValue={selectedValue} onChangeFilter ={onChangeFilter}/> 2016</h1>
       <div>
         <ColumnChart
           measures={measures}

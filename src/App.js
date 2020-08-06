@@ -13,14 +13,18 @@ const dateAttribute = '/gdc/md/xms7ga4tf3g3nzucd8380o2bev8oeknp/obj/2180';
 
 class App extends Component {
 
-    getMonthFilter() {
+    state = {
+        monthsSelected : 1
+    }
+
+    getMonthFilter(month) {
         return {
             absoluteDateFilter: {
                 dataSet: {
                     uri: dateAttribute
                 },
-                from: '2016-01-01',
-                to: '2016-01-31'
+                from: '2016-' + month + '-01',
+                to: '2016-' + month + '-31'
             }
 
         }
@@ -56,11 +60,18 @@ class App extends Component {
         }
     }
 
+    onChangeFilter(event) {
+        const newMonth = event.target.value;
+    
+        this.setState ({monthsSelected : newMonth});
+    }
+
     render() {
         const projectId = 'xms7ga4tf3g3nzucd8380o2bev8oeknp';
-        const filters = [this.getMonthFilter()];
+        const filters = [this.getMonthFilter(this.state.monthsSelected)];
         const measures = this.getMeasures();
         const viewBy = this.getViewBy();
+        const onChangeFilter = this.onChangeFilter.bind(this);
 
         return (
             <div className="App">
@@ -68,6 +79,7 @@ class App extends Component {
                     measures={measures}
                     filters={filters}
                     projectId={projectId}
+                    onChangeFilter={onChangeFilter}
                 />
                 <Chartperiod
                     measures={measures}
