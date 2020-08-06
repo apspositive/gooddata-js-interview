@@ -84,9 +84,10 @@ class App extends Component {
         // remove the highlight
 
 
-        //if (this.previousNode)
-            // leave it for later this.previousNode.style.fill = 'rgb(20, 178, 226)';
-        // parentNode.child[ (this.state.yearSelected - 2015 )* 12 + this.state.monthSelected - 1].className = '';
+        //if (this.previousNode)// leave it for later 
+        //  this.previousNode.style.fill = 'rgb(20, 178, 226)';
+
+        //parentNode.child[ (this.state.yearSelected - 2015 )* 12 + this.state.monthSelected - 1].style.Fill =  'rgb(20, 178, 226)';
 
         let res = {
             monthSelected: 1,
@@ -99,7 +100,8 @@ class App extends Component {
                 res.yearSelected = 2015 + Math.floor(i / 12);
                 res.monthSelected = 1 + i % 12;
 
-                // for later improvements event.target.style.fill = 'rgb(225, 178, 26)';
+                // for later improvements 
+                //  event.target.style.fill = 'rgb(225, 178, 26)';
                 //this.previousNode = event.target;
 
                 this.setState(res);
