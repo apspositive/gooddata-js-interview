@@ -1,6 +1,6 @@
 import React from 'react';
 
-const dropdown = (props) => {
+const dropdownMonth = (props) => {
 
   const months = [
     'January',
@@ -21,9 +21,9 @@ const dropdown = (props) => {
 
   return (
     <select defaultValue={selectedValue} onChange={onChangeFilter} >
-      {months.map((value, index) => <option key ={index} value={index + 1}>{value}</option>)}
+      {months.map((value, index) => <option key={index} value={index + 1}>{value}</option>)}
     </select>
   )
 }
 
-export default dropdown;
+export default dropdownMonth;

@@ -14,17 +14,18 @@ const dateAttribute = '/gdc/md/xms7ga4tf3g3nzucd8380o2bev8oeknp/obj/2180';
 class App extends Component {
 
     state = {
-        monthsSelected : 1
+        monthsSelected: 1,
+        yearSelected: 2016
     }
 
-    getMonthFilter(month) {
+    getMonthFilter(month, year) {
         return {
             absoluteDateFilter: {
                 dataSet: {
                     uri: dateAttribute
                 },
-                from: '2016-' + month + '-01',
-                to: '2016-' + month + '-31'
+                from: year + '-' + month + '-01',
+                to: year + '-' + month + '-31'
             }
 
         }
@@ -60,18 +61,25 @@ class App extends Component {
         }
     }
 
-    onChangeFilter(event) {
+    onChangeFilterMonth(event) {
         const newMonth = event.target.value;
-    
-        this.setState ({monthsSelected : newMonth});
+
+        this.setState({ monthsSelected: newMonth });
+    }
+
+    onChangeFilterYear(event) {
+        const newYear = event.target.value;
+
+        this.setState({ yearSelected: newYear });
     }
 
     render() {
         const projectId = 'xms7ga4tf3g3nzucd8380o2bev8oeknp';
-        const filters = [this.getMonthFilter(this.state.monthsSelected)];
+        const filters = [this.getMonthFilter(this.state.monthsSelected, this.state.yearSelected)];
         const measures = this.getMeasures();
         const viewBy = this.getViewBy();
-        const onChangeFilter = this.onChangeFilter.bind(this);
+        const onChangeFilterMonth = this.onChangeFilterMonth.bind(this);
+        const onChangeFilterYear = this.onChangeFilterYear.bind(this);
 
         return (
             <div className="App">
@@ -79,7 +87,10 @@ class App extends Component {
                     measures={measures}
                     filters={filters}
                     projectId={projectId}
-                    onChangeFilter={onChangeFilter}
+                    selectedValueMonth={this.state.monthsSelected}
+                    selectedValueYear={this.state.yearSelected}
+                    onChangeFilterMonth={onChangeFilterMonth}
+                    onChangeFilterYear={onChangeFilterYear}
                 />
                 <Chartperiod
                     measures={measures}
