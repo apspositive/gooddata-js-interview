@@ -21,7 +21,7 @@ const dropdownMonth = (props) => {
 
   return (
     <select defaultValue={selectedValue} onChange={onChangeFilterHandler} >
-      {months.map((value, index) => <option key={index} value={index + 1} selected ={selectedValue === index + 1}>{value}</option>)}
+      {months.map((value, index) => <option key={index} value={index + 1} selected={selectedValue === index + 1}>{value}</option>)}
     </select>
   )
 }

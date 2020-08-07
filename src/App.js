@@ -6,6 +6,8 @@ import '@gooddata/react-components/styles/css/main.css';
 
 import Chartdetailed from './components/chartDetailed';
 import Chartperiod from './components/chartPeriod';
+import Classes from './App.module.css';
+
 
 const grossProfitMeasure = '/gdc/md/xms7ga4tf3g3nzucd8380o2bev8oeknp/obj/6877';
 const dateAttributeInMonths = '/gdc/md/xms7ga4tf3g3nzucd8380o2bev8oeknp/obj/2142';
@@ -121,7 +123,7 @@ class App extends Component {
         const chartPeriodClickHandler = this.chartPeriodClickHandler.bind(this);
 
         return (
-            <div className="App">
+            <div className={Classes.App}>
                 <Chartdetailed
                     measures={measures}
                     filters={filters}
